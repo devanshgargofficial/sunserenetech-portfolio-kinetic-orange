@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunSerene Technologies — Engineered to Sell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#FF4D00;
+    --black:#000000;
+    --white:#FFFFFF;
+    --font-display:'Archivo Black', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --font-body:'Inter', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--orange);
+    color:var(--black);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--black);color:var(--orange);}
+
+  a{text-decoration:none;color:inherit;}
+
+  button{font-family:inherit;border:none;cursor:pointer;background:none;}
+
+  .uppercase{text-transform:uppercase;}
+
+  /* ===== NAVIGATION ===== */
+  .nav-wrap{
+    position:fixed;
+    top:24px;
+    left:0;
+    right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 32px;
+  }
+
+  .nav-logo{
+    font-family:var(--font-display);
+    font-size:20px;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+    color:var(--black);
+  }
+
+  .nav-pill{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--black);
+    border-radius:999px;
+    padding:14px 8px;
+    display:flex;
+    gap:4px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  .nav-pill a{
+    font-family:var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    color:var(--white);
+    padding:8px 18px;
+    border-radius:999px;
+    transition:background 0.25s ease, color 0.25s ease;
+    white-space:nowrap;
+  }
+
+  .nav-pill a:hover{
+    background:var(--white);
+    color:var(--black);
+  }
+
+  .nav-social{
+    display:flex;
+    gap:14px;
+  }
+
+  .nav-social a{
+    width:32px;height:32px;
+    border:2px solid var(--black);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  }
+
+  .nav-social a:hover{
+    background:var(--black);
+    color:var(--orange);
+    transform:translateY(-2px);
+  }
+
+  .nav-social svg{width:14px;height:14px;}
+
+  @media (max-width:800px){
+    .nav-pill{display:none;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:140px 32px 0;
+  }
+
+  .hero-headline{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    letter-spacing:-0.04em;
+    line-height:0.85;
+    font-size:16vw;
+    text-align:center;
+  }
+
+  .hero-headline .accent{
+    -webkit-text-stroke:2px var(--black);
+    color:var(--orange);
+  }
+
+  .hero-meta{
+    margin-top:64px;
+    border-top:2px solid var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:24px 0 40px;
+    gap:24px;
+  }
+
+  .hero-meta-left, .hero-meta-right{
+    font-family:var(--font-mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+    line-height:1.5;
+  }
+
+  .hero-meta-right{
+    text-align:right;
+  }
+
+  .hero-meta-left .dim{opacity:0.6;}
+
+  .scroll-indicator{
+    width:144px;
+    height:144px;
+    position:relative;
+    flex-shrink:0;
+  }
+
+  .scroll-indicator svg{
+    width:100%;
+    height:100%;
+    animation:spin 12s linear infinite;
+  }
+
+  .scroll-indicator .arrow{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:22px;height:22px;
+  }
+
+  @keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }
+
+  @media (max-width:800px){
+    .hero-meta{flex-direction:column;text-align:center;}
+    .hero-meta-right{text-align:center;}
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee-section{
+    background:var(--black);
+    transform:skewY(-2deg);
+    margin:120px 0;
+    padding:70px 0;
+    overflow:hidden;
+  }
+
+  .marquee-row{
+    display:flex;
+    white-space:nowrap;
+    transform:skewY(2deg);
+  }
+
+  .marquee-track{
+    display:flex;
+    animation:marquee-left 22s linear infinite;
+  }
+
+  .marquee-track.reverse{
+    animation:marquee-right 22s linear infinite;
+  }
+
+  .marquee-row span{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    letter-spacing:-0.03em;
+    padding-right:40px;
+  }
+
+  .marquee-row.row-1 span{
+    font-size:10vw;
+    color:var(--orange);
+  }
+
+  .marquee-row.row-2 span{
+    font-size:6vw;
+    color:var(--white);
+    opacity:0.8;
+  }
+
+  @keyframes marquee-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  @keyframes marquee-right{
+    from{transform:translateX(-50%);}
+    to{transform:translateX(0);}
+  }
+
+  /* ===== SERVICES ===== */
+  .services{
+    background:var(--black);
+    color:var(--white);
+    padding:0 32px 100px;
+  }
+
+  .services-heading{
+    font-family:var(--font-mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+    opacity:0.6;
+    padding:40px 0;
+  }
+
+  .service-item{
+    border-top:1px solid rgba(255,255,255,0.2);
+    padding:36px 0;
+    display:flex;
+    align-items:center;
+    gap:32px;
+    cursor:pointer;
+    transition:background 0.3s ease;
+    position:relative;
+  }
+
+  .service-item:last-child{
+    border-bottom:1px solid rgba(255,255,255,0.2);
+  }
+
+  .service-item:hover{
+    background:rgba(255,255,255,0.05);
+  }
+
+  .service-index{
+    font-family:var(--font-mono);
+    font-size:14px;
+    color:var(--orange);
+    flex-shrink:0;
+    width:48px;
+  }
+
+  .service-body{
+    flex:1;
+    transition:transform 0.35s ease;
+  }
+
+  .service-item:hover .service-body{
+    transform:translateX(16px);
+  }
+
+  .service-title{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    letter-spacing:-0.03em;
+    line-height:0.95;
+    font-size:7vw;
+  }
+
+  .service-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
+  }
+
+  .service-tags span{
+    font-family:var(--font-mono);
+    font-size:11px;
+    text-transform:uppercase;
+    border:1px solid rgba(255,255,255,0.4);
+    border-radius:999px;
+    padding:5px 14px;
+  }
+
+  .service-arrow{
+    width:44px;height:44px;
+    flex-shrink:0;
+    opacity:0;
+    transform:rotate(0deg);
+    transition:opacity 0.3s ease, transform 0.3s ease;
+    color:var(--orange);
+  }
+
+  .service-item:hover .service-arrow{
+    opacity:1;
+    transform:rotate(45deg);
+  }
+
+  @media (max-width:800px){
+    .service-title{font-size:11vw;}
+    .service-arrow{display:none;}
+  }
+
+  /* ===== CTA ===== */
+  .cta{
+    padding:180px 32px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:56px;
+  }
+
+  .cta-heading{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    letter-spacing:-0.04em;
+    line-height:0.9;
+    font-size:14vw;
+  }
+
+  .cta-button{
+    background:var(--black);
+    color:var(--white);
+    font-family:var(--font-mono);
+    text-transform:uppercase;
+    font-size:14px;
+    letter-spacing:0.02em;
+    padding:24px 56px;
+    border-radius:999px;
+    transition:transform 0.3s ease;
+    display:inline-block;
+  }
+
+  .cta-button:hover{
+    transform:scale(1.1);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer{
+    border-top:2px solid var(--black);
+    padding:28px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .footer-copy{
+    font-family:var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+  }
+
+  .footer-links{
+    display:flex;
+    gap:24px;
+  }
+
+  .footer-links a{
+    font-family:var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+    transition:transform 0.25s ease;
+    display:inline-block;
+  }
+
+  .footer-links a:hover{
+    transform:translateX(4px);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav-wrap">
+  <div class="nav-logo">SunSerene</div>
+  <div class="nav-pill">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-social">
+    <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+    </a>
+    <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-headline">Engineered<br><span class="accent">to sell</span></h1>
+
+  <div class="hero-meta">
+    <div class="hero-meta-left">
+      Based in<br>
+      <span class="dim">New Delhi, India</span>
+    </div>
+
+    <div class="scroll-indicator">
+      <svg viewBox="0 0 144 144">
+        <defs>
+          <path id="circlePath" d="M 72,72 m -58,0 a 58,58 0 1,1 116,0 a 58,58 0 1,1 -116,0"/>
+        </defs>
+        <text font-family="Space Mono" font-size="9" font-weight="700" letter-spacing="1" fill="#000">
+          <textPath href="#circlePath" startOffset="0%">
+            SCROLL DOWN &#8226; SCROLL DOWN &#8226; SCROLL DOWN &#8226;
+          </textPath>
+        </text>
+      </svg>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+
+    <div class="hero-meta-right">
+      SunSerene Technologies<br>
+      Web &#8226; App &#8226; Marketplace &#8226; Marketing
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee-section">
+  <div class="marquee-row row-1">
+    <div class="marquee-track">
+      <span>SHOPIFY &#8226; WOOCOMMERCE &#8226; ZOHO COMMERCE &#8226; MERN STACK &#8226;</span>
+      <span>SHOPIFY &#8226; WOOCOMMERCE &#8226; ZOHO COMMERCE &#8226; MERN STACK &#8226;</span>
+    </div>
+  </div>
+  <div class="marquee-row row-2" style="margin-top:24px;">
+    <div class="marquee-track reverse">
+      <span>AMAZON &#8226; FLIPKART &#8226; MEESHO &#8226; JIOMART &#8226; INDIAMART &#8226;</span>
+      <span>AMAZON &#8226; FLIPKART &#8226; MEESHO &#8226; JIOMART &#8226; INDIAMART &#8226;</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-heading">// What we build</div>
+
+  <div class="service-item">
+    <div class="service-index">01</div>
+    <div class="service-body">
+      <div class="service-title">Web &amp; App Development</div>
+      <div class="service-tags">
+        <span>MERN Stack</span><span>Shopify</span><span>WooCommerce</span><span>Zoho Commerce</span>
+      </div>
+    </div>
+    <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </div>
+
+  <div class="service-item">
+    <div class="service-index">02</div>
+    <div class="service-body">
+      <div class="service-title">Marketplace Management</div>
+      <div class="service-tags">
+        <span>Amazon</span><span>Flipkart</span><span>Meesho</span><span>JioMart</span><span>IndiaMART</span>
+      </div>
+    </div>
+    <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </div>
+
+  <div class="service-item">
+    <div class="service-index">03</div>
+    <div class="service-body">
+      <div class="service-title">D2C Storefronts</div>
+      <div class="service-tags">
+        <span>Custom Checkout</span><span>CRO</span><span>Retention</span>
+      </div>
+    </div>
+    <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </div>
+
+  <div class="service-item">
+    <div class="service-index">04</div>
+    <div class="service-body">
+      <div class="service-title">Digital Marketing</div>
+      <div class="service-tags">
+        <span>SEO</span><span>AEO</span><span>GEO</span><span>Paid Ads</span><span>Brand Strategy</span>
+      </div>
+    </div>
+    <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <h2 class="cta-heading">Let's<br>build.</h2>
+  <a href="mailto:hello@sunserenetech.in" class="cta-button">Start a project</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-copy">&#169; 2026 SunSerene Technologies</div>
+  <div class="footer-links">
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:hello@sunserenetech.in">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>
